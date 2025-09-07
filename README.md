@@ -1,9 +1,8 @@
 # Fanfi
 
 > Hackathon project — Fanfi: a fan-engagement and NFT-based tipping platform (frontend in React). Smart contracts assumed to be written in **Move** and deployed to **Aptos** (replacing Solidity/Ethereum).
-
 ---
-
+ ![FanFi Banner](https://res.cloudinary.com/dsdcta1sr/image/upload/v1757237283/Screenshot_2025-09-07_145647_btbjjl.png) 
 ## 🧭 Project Overview
 
 **Fanfi** is a hackathon-ready prototype that connects creators and fans by letting fans tip, stake, and mint limited edition collectibles. This repository contains the frontend (React) and project scaffolding. For this hackathon we use **Move** smart contracts on the **Aptos** blockchain rather than Solidity/Ethereum.
@@ -117,9 +116,8 @@ aptos move publish --package-dir contracts/Move --profile testnet
 
 Include screenshots or a short GIF in `public/`. Add them to this README like:
 
-```markdown
-![Fanfi Home](/screenshot.png)
-```
+
+![Fanfi Home]([https://res.cloudinary.com/dsdcta1sr/image/upload/v1757237283/Screenshot_2025-09-07_145647_btbjjl.png])
 
 **Tip:** For hackathon judging, include a short video/GIF (e.g. `public/demo.gif`) showing: connect wallet -> tip -> mint -> view NFT.
 
