@@ -1,70 +1,173 @@
-# Getting Started with Create React App
+# Fanfi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Hackathon project — Fanfi: a fan-engagement and NFT-based tipping platform (frontend in React). Smart contracts assumed to be written in **Move** and deployed to **Aptos** (replacing Solidity/Ethereum).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🧭 Project Overview
 
-### `npm start`
+**Fanfi** is a hackathon-ready prototype that connects creators and fans by letting fans tip, stake, and mint limited edition collectibles. This repository contains the frontend (React) and project scaffolding. For this hackathon we use **Move** smart contracts on the **Aptos** blockchain rather than Solidity/Ethereum.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Key ideas:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Fans can tip creators and receive collectible NFTs in return.
+* Creator profiles and feed built in the React frontend.
+* Move contracts on Aptos manage minting, balances, and access-control.
 
-### `npm test`
+## 🎯 Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* User onboarding (connect wallet — Aptos-compatible wallets like Petra / Martian)
+* Browse creators and their collectible drops
+* Tip creators using Aptos coins (or testnet tokens)
+* Mint limited edition NFTs via Move contracts
+* Admin/creator panel to create drops and set supply
+* Responsive UI (Create React App-based)
 
-### `npm run build`
+## 🧰 Tech Stack
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Frontend: React (Create React App)
+* Styling: CSS (files in `src/`)
+* Smart Contracts: **Move** (Aptos) — replace any Solidity references with Move
+* Blockchain: **Aptos** (testnet & devnet for hackathon)
+* Wallets: Petra / Martian / Aptos Wallet (browser extensions)
+* Tooling: `npm` / `yarn`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📁 Recommended File Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+(This repo currently contains a standard CRA frontend. Add the Move contracts and deployment scripts as shown below.)
 
-### `npm run eject`
+```
+Fanfi/
+├─ .gitignore
+├─ package.json
+├─ package-lock.json
+├─ README.md          <- this file
+├─ public/
+│  ├─ index.html
+│  ├─ favicon.ico
+│  └─ screenshot.png  <- add screenshot(s) here for README
+├─ src/
+│  ├─ index.js
+│  ├─ App.js
+│  ├─ components/
+│  │  ├─ Navbar.js
+│  │  ├─ CreatorCard.js
+│  │  └─ MintModal.js
+│  ├─ pages/
+│  │  ├─ Home.js
+│  │  └─ Creator.js
+│  ├─ styles/
+│  │  └─ main.css
+│  └─ utils/
+│     └─ aptos.js      <- helper to interact with Aptos wallet & node
+├─ contracts/
+│  ├─ Move/            <- place Move modules here (recommended)
+│  │  ├─ Fanfi.move
+│  │  └─ Fanfi_nft.move
+│  └─ scripts/
+│     ├─ deploy.sh     <- sample deployment script for aptos CLI
+│     └─ mint.js       <- script to mint using Aptos SDK
+└─ docs/
+   └─ architecture.md
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+> If your repo currently lacks a `contracts/` folder, add it and place Move modules there. The frontend should call a deployment/minting script or a backend API that interacts with Aptos.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ⚙️ Local Setup (Frontend)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Clone the repo
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/rajkumar963/Fanfi.git
+cd Fanfi
+```
 
-## Learn More
+2. Install dependencies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm install
+# or
+# yarn install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Start the dev server
 
-### Code Splitting
+```bash
+npm start
+# open http://localhost:3000
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🔗 Integrating with Aptos (high-level)
 
-### Analyzing the Bundle Size
+> This section assumes you will write Move modules and deploy on Aptos testnet/devnet. Replace any existing Solidity/Ethereum-specific code with Move and Aptos SDK equivalents.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. Install Aptos CLI and the Aptos SDK (see Aptos docs for the latest instructions).
+2. Create or use an Aptos account (testnet) and fund it with test tokens.
+3. Compile and publish Move modules:
 
-### Making a Progressive Web App
+```bash
+# Example (pseudocode) - adapt to your toolchain
+aptos move compile --package-dir contracts/Move
+aptos move publish --package-dir contracts/Move --profile testnet
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+4. From frontend, use Aptos wallet adapters or the Aptos JavaScript SDK to sign transactions and call published Move modules (mint, tip, transfer).
 
-### Advanced Configuration
+## 📸 Screenshots / Demo
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Include screenshots or a short GIF in `public/`. Add them to this README like:
 
-### Deployment
+```markdown
+![Fanfi Home](/screenshot.png)
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Tip:** For hackathon judging, include a short video/GIF (e.g. `public/demo.gif`) showing: connect wallet -> tip -> mint -> view NFT.
 
-### `npm run build` fails to minify
+## 🧩 How to replace Solidity/Ethereum references with Move/Aptos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Any `contracts/` directory that contains `.sol` files should be converted into `contracts/Move/` with `.move` files.
+* Replace web3/ethers calls with Aptos SDK calls. For example:
+
+  * `ethers.js` wallet connection -> use `Aptos` wallet adapters (Petra/Martian/Aptos Wallet)
+  * `contract.methods.myMethod()` -> construct Aptos transaction payloads calling the published Move module
+* Update README, environment variables, and CI scripts mentioning Ethereum to refer to Aptos.
+
+## ✅ Example: Frontend -> Aptos mint flow (conceptual)
+
+1. User clicks "Mint" in the UI.
+2. Frontend prepares the transaction payload (module name, function, arguments, gas).
+3. User confirms the transaction in their Aptos wallet extension.
+4. Transaction gets submitted to Aptos node; on success, frontend shows minted NFT metadata.
+
+## 🧪 Testnet / Demo Tips for Hackathon
+
+* Use Aptos testnet for demo to avoid mainnet costs.
+* Provide pre-funded test accounts and seed phrase in a `docs/demo_accounts.md` (ONLY for hackathon demo, **do not** commit real private keys).
+* Add a script `contracts/scripts/fund_demo_accounts.sh` to automate funding from a faucet.
+
+## 🛠️ Recommended Scripts (examples)
+
+* `contracts/scripts/compile_move.sh` — compile Move modules
+* `contracts/scripts/publish_move.sh` — publish to Aptos testnet
+* `contracts/scripts/mint_demo.sh` — mint demo NFTs (used by frontend or CLI)
+
+## 🤝 Contribution
+
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feat/my-change`
+3. Commit & push
+4. Open a PR describing your change
+
+## 📜 License
+
+Add a license file (`LICENSE`) to declare how others can use your code. MIT is common for hackathon projects.
+
+## 📬 Contact
+
+Project owner: `rajkumar963` (GitHub profile)
+
+---
+
+*This README was generated/templated for a hackathon. Replace placeholders (scripts, Move modules, screenshots) with real files before final submission.*
+
+<!-- Repository reference: GitHub repo -->
